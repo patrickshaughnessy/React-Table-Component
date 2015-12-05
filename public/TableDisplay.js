@@ -7,23 +7,34 @@ import React from 'react';
 
 export default class extends React.Component {
   render(){
+
+    let tdRows = this.props.data.map(function(row, i){
+      // each row is an object
+      let tdValues = [];
+      for (var key in row){
+        let td = <td>{row[key]}</td>
+        tdValues.push(td)
+      }
+      return (
+        <tr>{tdValues}</tr>
+      )
+    })
+
+    let thRow = Object.keys(this.props.data[0]).map(function(elem){
+      return (
+        <th>{elem}</th>
+      )
+    });
+
     return (
       <table>
         <thead>
           <tr>
-            <th>Example TH1</th>
-            <th>Example TH2</th>
+            {thRow}
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>example row1 td1</td>
-            <td>example row1 td2</td>
-          </tr>
-          <tr>
-            <td>example row2 td1</td>
-            <td>example row2 td2</td>
-          </tr>
+          {tdRows}
         </tbody>
       </table>
     )
